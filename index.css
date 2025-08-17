@@ -1,0 +1,134 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --bg-color: #15191f;
+    --display-color: #27282f;
+    --operations-color: #1ab966;
+    --white-color: #f9fcff;
+    --gray-color: #6d6e71;
+    --red-color: #c82222;
+    --light-red-color: #d63c3c;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gray-color);
+}
+
+.container {
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 5%;
+    padding: 10px;
+    row-gap: 2px;
+    border-radius: 4px;
+}
+
+.container .display-panel {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.container .display-panel .input-display {
+    background-color: var(--display-color);
+    padding: 6px;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 56px;
+    height: 100px;
+    color: var(--white-color);
+    text-align: right;
+}
+
+.container .operations-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--display-color);
+    gap: 2px;
+}
+
+.container .operations-panel .actions {
+    display: flex;
+    column-gap: 2px;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 3px;
+}
+
+.container .operations-panel .actions button {
+    background-color: var(--bg-color);
+    border: none;
+    padding: 14px 18px;
+    font-weight: bolder;
+    border-radius: 4px;
+    color: var(--operations-color);
+    cursor: pointer;
+}
+
+.container .operations-panel .actions button:hover {
+    background-color: var(--operations-color);
+    color: var(--white-color);
+}
+
+.container .operations-panel .operations {
+    display: flex;
+    column-gap: 2px;
+    justify-content: center;
+    padding: 3px;
+}
+
+.container .operations-panel .operations button:hover {
+    background-color: var(--operations-color);
+    color: var(--white-color);
+}
+
+.container .operations-panel .operations button {
+    background-color: var(--bg-color);
+    flex: 1 1 auto;
+    border: none;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bolder;
+    color: var(--operations-color);
+}
+
+.container .keys-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 3px;
+}
+
+.container .keys-panel button {
+    background-color: var(--display-color);
+    padding: 14px 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--white-color);
+    font-weight: bolder;
+}
+
+.container .keys-panel button:hover {
+    background-color: var(--gray-color);
+}
+
+.container .keys-panel .equals {
+    background-color: var(--red-color);
+}
+
+.container .keys-panel .equals:hover {
+    background-color: var(--light-red-color);
+}
