@@ -71,6 +71,7 @@ body {
     border: none;
     padding: 14px 18px;
     font-weight: bolder;
+    font-size: 1.2em;
     border-radius: 4px;
     color: var(--operations-color);
     cursor: pointer;
@@ -101,6 +102,7 @@ body {
     cursor: pointer;
     border-radius: 4px;
     font-weight: bolder;
+    font-size: 1.2em;
     color: var(--operations-color);
 }
 
@@ -119,6 +121,7 @@ body {
     border-radius: 4px;
     color: var(--white-color);
     font-weight: bolder;
+    font-size: 1.2em;
 }
 
 .container .keys-panel button:hover {
