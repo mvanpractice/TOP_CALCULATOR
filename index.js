@@ -1,103 +1,146 @@
 
-/**
- * Variables and DOM queries
- */
 
-const operationsMap = Object.freeze({
-    add: (firstNumber, SecondNumber) => firstNumber + SecondNumber,
-    sub: (firstNumber, SecondNumber) => firstNumber - SecondNumber,
-    mul: (firstNumber, SecondNumber) => firstNumber * SecondNumber,
-    div: (firstNumber, SecondNumber) => firstNumber / SecondNumber,
+const firstNumber = 0;
+const secondNumber = 0;
+const operator = '';
+
+const validNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const validOperations = ['add', 'sub', 'mul', 'div'];
+const validActions = ['.', '=', 'erase', 'clear'];
+
+const operationMapper = Object.freeze({
+    add: (a, b) => a + b,
+    sub: (a, b) => a - b,
+    mul: (a, b) => a * b,
+    div: (a, b) => a / b,
 });
 
-const validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9 , 0];
-const validOperations = ['add', 'sub', 'mul', 'div'];
-const validActions = ['erase', 'clear', 'decimal-point', '='];
-
-const queryOne = factorySelectorMaker('querySelector');
-const queryAll = factorySelectorMaker('querySelectorAll');
-
-/**
- * First level query
- */
-const container = queryOne(document, '.container');
-const displayPanel = queryOne(document, '.display-panel');
-const operationsPanel = queryOne(document, '.operations-panel');
-const keysPanel = queryOne(document, '.keys-panel');
-
-/**
- * Second level query
- */
-const inputDisplay = queryOne(displayPanel, '.input-display');
-const actionKeys = queryOne(operationsPanel, '.action-keys');
-const operationKeys = queryOne(operationsPanel, '.operation-keys');
-
-/**
- * Functions
- */
-
-/**
- * My first factory function taught by ChatGPT
- */
-function factorySelectorMaker(selectorMethod) {
-    return (nodeObject, nodeSelector) => {
-        return nodeObject[selectorMethod](nodeSelector);
-    }
-}
+const inputDisplay = document.querySelector('.input-display');
+const container = document.querySelector('.container');
 
 function handleContainerClicks(event) {
     event.stopPropagation();
 
-    const btnclicked = event.target;
+    const keyPressed = event.target;
 
-    // Only button clicks
-    if (btnclicked.closest('button')) {
-        
-        // Only valid buttons
-        if (btnclicked.id && btnclicked.id !== 'input-display') {
+    if (keyPressed.id && keyPressed.closest('button')) {
+
+        if (validNumbers.includes(parseInt(keyPressed.id))) {
+            // Number
+            handleNumberKey(keyPressed.id);
+
+        } else if (validActions.includes(keyPressed.id)) {
+            // Action
+            handleActionKey(keyPressed.id);
+
+        } else if (validOperations.includes(keyPressed.id)) {
+            // Operation
+            handleOperationKey(keyPressed.id);
+        }
+    }
+}
+
+function handleNumberKey(keyId) {
+    return !inputDisplay.value ? inputDisplay.value = keyId : inputDisplay.value += keyId;
+}
+
+function handleActionKey(keyId) {
+    const splitInput = inputDisplay.value.split('');
+
+    switch (keyId) {
+        case 'erase':
+            splitInput.pop();
+            const joinInput = splitInput.join('');
+            inputDisplay.value = joinInput;
+            break;
+    
+        case 'clear':
+            inputDisplay.value = '';
+            break;
+
+        case '.':
+            const hasDecimal = splitInput.includes(keyId);
             
-            // Check what button is clicked
-            if (validNumbers.includes(parseInt(btnclicked.id))) {
-                
-                // Number
-                handleNumberClick(btnclicked.id);
-            } else if (validActions.includes(btnclicked.id)) {
+            if (!hasDecimal) {
+                splitInput.push(keyId);
+                const joinInput = splitInput.join('');
+                inputDisplay.value = joinInput;
 
-                // Action
-                handleActionClick(btnclicked.id);
-            } else if (validOperations.includes(btnclicked.id)) {
+            }
+            break;
 
-                // Operation
-                handleOperationClick(btnclicked.id);
+        case '=':
+            if (inputDisplay.value) {
+                const validOperator = /[\+\-\*\/]/;
+                const operatorIndex = inputDisplay.value.search(validOperator);
+
+                if (operatorIndex !== -1) {
+                    const splitInput = inputDisplay.value.split(inputDisplay.value.charAt(operatorIndex));
+                    
+                    if (splitInput[0] && splitInput[1]) {
+                        // 
+                        getValidOperation(splitInput[0], splitInput[1], inputDisplay.value.charAt(operatorIndex));
+                    }
+                }
+            }
+            break;
+    }
+}
+
+function handleOperationKey(keyId) {
+    if (inputDisplay.value) {
+        const validOperator = /[\+\-\*\/]/;
+        const operatorIndex = inputDisplay.value.search(validOperator);
+
+        if (operatorIndex !== -1) {
+            const splitInput = inputDisplay.value.split(inputDisplay.value.charAt(operatorIndex));
+            
+            if (splitInput[0] && splitInput[1]) {
+                // 
+                getValidOperation(splitInput[0], splitInput[1], inputDisplay.value.charAt(operatorIndex));
+            }
+            
+        } else {
+            switch (keyId) {
+                case 'add':
+                    inputDisplay.value += '+';
+                    break;
+
+                case 'sub':
+                    inputDisplay.value += '-';
+                    break;
+
+                case 'mul':
+                    inputDisplay.value += '*';
+                    break;
+
+                case 'div':
+                    inputDisplay.value += '/';
+                    break;
             }
         }
     }
 }
 
-function handleNumberClick(clickId) {
-    const inputValue = inputDisplay.value;
-
-    return !inputValue ? inputDisplay.value = clickId : inputDisplay.value += clickId;
-}
-
-function handleActionClick(clickId) {
-    const inputValue = inputDisplay.value;
-    
-    if (!inputValue) {
-        console.log('empty');
+function getValidOperation(num1, num2, oper, trueOper) {
+    switch (oper) {
+        case '*':
+            const prod = operationMapper.mul(num1, num2);
+            inputDisplay.value = prod;
+            break;
+        case '/':
+            const qout = operationMapper.div(num1, num2);
+            inputDisplay.value = qout;
+            break;
+        case '+':
+            const sum = operationMapper.add(num1, num2);
+            inputDisplay.value = sum;
+            break;
+        case '-':
+            const diff = operationMapper.sub(num1, num2);
+            inputDisplay.value = diff;
+            break;
     }
 }
-
-function handleOperationClick(clickId) {
-    const inputValue = inputDisplay.value;
-
-    // if input is empty, return enter number first
-    // if input has value, check if all are numbers
-    // I can't finish this yet, I feel so so so dumbbbb....
-}
-
-/**
- * Event Listeners
- */
 
 container.addEventListener('click', handleContainerClicks);
