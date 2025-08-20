@@ -58,7 +58,7 @@ body {
     gap: 2px;
 }
 
-.container .operations-panel .actions {
+.container .operations-panel .action-keys {
     display: flex;
     column-gap: 2px;
     justify-content: flex-end;
@@ -66,7 +66,7 @@ body {
     padding: 3px;
 }
 
-.container .operations-panel .actions button {
+.container .operations-panel .action-keys button {
     background-color: var(--bg-color);
     border: none;
     padding: 14px 18px;
@@ -77,24 +77,24 @@ body {
     cursor: pointer;
 }
 
-.container .operations-panel .actions button:hover {
+.container .operations-panel .action-keys button:hover {
     background-color: var(--operations-color);
     color: var(--white-color);
 }
 
-.container .operations-panel .operations {
+.container .operations-panel .operation-keys {
     display: flex;
     column-gap: 2px;
     justify-content: center;
     padding: 3px;
 }
 
-.container .operations-panel .operations button:hover {
+.container .operations-panel .operation-keys button:hover {
     background-color: var(--operations-color);
     color: var(--white-color);
 }
 
-.container .operations-panel .operations button {
+.container .operations-panel .operation-keys button {
     background-color: var(--bg-color);
     flex: 1 1 auto;
     border: none;
