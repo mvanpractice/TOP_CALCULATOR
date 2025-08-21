@@ -7,131 +7,146 @@
 }
 
 :root {
-    --bg-color: #15191f;
-    --display-color: #27282f;
-    --operations-color: #1ab966;
-    --white-color: #f9fcff;
-    --gray-color: #6d6e71;
-    --red-color: #c82222;
-    --light-red-color: #d63c3c;
+    --light-red: #e87575;
+    --light-blue: #93a2d0;
+    --white: #e3e0e0;
+    --black: #202229;
+    --grey: #2b2d35;
+    --dark-blue: #5466c8;
+    --dark-red: #ae3131;
 }
 
 body {
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #8c9eff, #78c6d7, #7788e4, #8c9eff);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: var(--gray-color);
+    row-gap: 20px;
 }
 
 .container {
-    background-color: var(--bg-color);
+    background-color: var(--black);
+    max-width: auto;
+    min-width: 400px;
+    padding: 14px;
+}
+
+.container .calculator-header {
     display: flex;
-    flex-direction: column;
-    width: 400px;
-    margin: 5%;
-    padding: 10px;
-    row-gap: 2px;
-    border-radius: 4px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container .calculator-header p {
+    color: var(--light-blue);
+}
+
+.container .theme-toggle {
+    background-color: var(--dark-blue);
+    padding: 4px 8px;
+    border-radius: 26px;
+}
+
+.container .theme-toggle button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 4px;
 }
 
 .container .display-panel {
+    background-color: var(--grey);
     display: flex;
-    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
 }
 
-.container .display-panel .input-display {
-    background-color: var(--display-color);
-    padding: 6px;
-    outline: none;
+.container .display-panel .first-number {
+    color: var(--white);
+    font-size: 0.9em;
+    color: var(--light-red);
+}
+
+.container .display-panel .second-number {
+    color: var(--white);
+    font-size: 1.8em;
+}
+
+.container .actions-panel {
+    display: flex;
+    column-gap: 2px;
+    margin-bottom: 2px;
+}
+
+.container .actions-panel button {
+    background-color: var(--light-blue);
     border: none;
-    width: 100%;
-    font-size: 46px;
-    height: 100px;
-    color: var(--white-color);
-    text-align: right;
+    color: var(--black);
+    font-weight: bolder;
+    padding: 18px 14px;
+    cursor: pointer;
+    flex: 1 1 auto;
+}
+
+.container .actions-panel button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
 }
 
 .container .operations-panel {
     display: flex;
-    flex-direction: column;
-    background-color: var(--display-color);
-    gap: 2px;
-}
-
-.container .operations-panel .action-keys {
-    display: flex;
+    margin-bottom: 2px;
     column-gap: 2px;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 3px;
 }
 
-.container .operations-panel .action-keys button {
-    background-color: var(--bg-color);
-    border: none;
-    padding: 14px 18px;
-    font-weight: bolder;
-    font-size: 1.2em;
-    border-radius: 4px;
-    color: var(--operations-color);
-    cursor: pointer;
-}
-
-.container .operations-panel .action-keys button:hover {
-    background-color: var(--operations-color);
-    color: var(--white-color);
-}
-
-.container .operations-panel .operation-keys {
-    display: flex;
-    column-gap: 2px;
-    justify-content: center;
-    padding: 3px;
-}
-
-.container .operations-panel .operation-keys button:hover {
-    background-color: var(--operations-color);
-    color: var(--white-color);
-}
-
-.container .operations-panel .operation-keys button {
-    background-color: var(--bg-color);
+.container .operations-panel button {
+    background-color: var(--grey);
+    color: var(--light-red);
     flex: 1 1 auto;
     border: none;
-    padding: 14px 18px;
     cursor: pointer;
-    border-radius: 4px;
+    padding: 20px 14px;
     font-weight: bolder;
-    font-size: 1.2em;
-    color: var(--operations-color);
 }
 
-.container .keys-panel {
+.container .operations-panel button:hover {
+    background-color: var(--dark-red);
+    color: var(--white);
+}
+
+.container .number-keys-panel {
+    /* background-color: var(--grey); */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    padding: 3px;
 }
 
-.container .keys-panel button {
-    background-color: var(--display-color);
-    padding: 14px 18px;
+.container .number-keys-panel button {
+    background-color: var(--grey);
+    color: var(--white);
     border: none;
+    padding: 20px 14px;
     cursor: pointer;
-    border-radius: 4px;
-    color: var(--white-color);
     font-weight: bolder;
-    font-size: 1.2em;
 }
 
-.container .keys-panel button:hover {
-    background-color: var(--gray-color);
+.container .number-keys-panel .equal-sign {
+    background-color: var(--light-red) !important;
 }
 
-.container .keys-panel .equals {
-    background-color: var(--red-color);
+.container .number-keys-panel button:hover {
+    background-color: var(--dark-blue);
 }
 
-.container .keys-panel .equals:hover {
-    background-color: var(--light-red-color);
+.container .number-keys-panel .equal-sign:hover {
+    background-color: var(--dark-red) !important;
 }
